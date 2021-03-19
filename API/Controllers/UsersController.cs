@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,7 @@ namespace API.Controllers
         //Adding endpoints: togetalltheusers / togetspecificuser
 
         [HttpGet]
+        [AllowAnonymous]
         //return a type of actionresult we specify the type of thing
         //we are going to send back list of users
         //several collection for retruning list, now IEnumerable / could be also a List 
@@ -31,6 +33,7 @@ namespace API.Controllers
         }
 
         // api/users/3
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
